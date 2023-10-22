@@ -1,0 +1,68 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span >{{dialogData.action}} Product</span>
+        <span class="spacer"></span>
+        <button class="mat-dialog-close" mat-icon-buttoon mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="productForm">
+        <div  fxFlex fxLayout="column">
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Dtr</mat-label>
+                    <input matInput formControlName="dtr" required>
+                    <mat-error *ngIf="productForm.controls.dtr.touched && productForm.controls.dtr.invalid">
+                        <span *ngIf="productForm.controls.dtr.errors.required">This field is obligatory</span>
+                        <span *ngIf="productForm.controls.dtr.errors.pattern">This field is invalid</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            
+            
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Dtr inverse</mat-label>
+                    <input matInput formControlName="inverse" required>
+                    <mat-error *ngIf="productForm.controls.inverse.touched && productForm.controls.inverse.invalid">
+                        <span *ngIf="productForm.controls.inverse.errors.required">This field is obligatory</span>
+                        <span *ngIf="productForm.controls.inverse.errors.pattern">This field is invalid</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="categoryId">
+                        <mat-option *ngFor="let category of categories" [value]="category.id" >
+                            {{category.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Description</mat-label>
+                    <input matInput formControlName="description" required>
+                    <mat-error *ngIf="productForm.controls.desciption.touched && productForm.controls.description.invalid">
+                        <span *ngIf="productForm.controls.description.errors.required">This field is obligatory</span>
+                        <span *ngIf="productForm.controls.description.errors.pattern">This field is invalid</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()" [disabled]="!(productForm.valid && productForm.dirty)">
+        <mat-icon>save</mat-icon>{{action}}
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close><mat-icon>cancel</mat-icon>Close</button>
+</mat-dialog-actions>
